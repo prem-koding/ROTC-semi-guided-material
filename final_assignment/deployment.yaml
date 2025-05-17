@@ -1,7 +1,15 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: crud-app
+
+---
+
+apiVersion: v1
 kind: Secret
 metadata:
   name: postgres-secret
+  namespace: crud-app
 type: Opaque
 data:
   db_password: QXAwMHJQYSQkdzByZCEK
@@ -21,6 +29,7 @@ spec:
     metadata:
       labels:
         app: postgres
+      namespace: crud-app
     spec:
       containers:
         - name: postgres
@@ -44,6 +53,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres-service
+  namespace: crud-app
 spec:
   type: ClusterIP
   ports:
@@ -58,6 +68,7 @@ apiVersion: apps/v1
 kind: Deployment    
 metadata:
   name: backend-api
+  namespace: crud-app
 spec: 
   replicas: 1
   selector:
@@ -93,6 +104,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-api-service
+  namespace: crud-app
 spec:
   type: ClusterIP
   ports:
@@ -100,3 +112,6 @@ spec:
       targetPort: 8000
   selector:
     app: backend-api
+
+---
+

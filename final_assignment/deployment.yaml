@@ -53,3 +53,38 @@ spec:
     app: postgres
 
 ---
+
+# Create a deployment following point 5 of readme.md
+
+apiVersion: apps/v1
+kind: Deployment    
+metadata:
+  name: backend-api
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+        - name: backend-api
+          image: final_assignment-backend
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: db_address
+              value: "postgres-service"
+            - name: db_username
+              value: "postgres"
+            - name: db_name
+              value: "postgres"
+            - name: db_password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db_password

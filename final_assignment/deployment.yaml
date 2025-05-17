@@ -54,8 +54,6 @@ spec:
 
 ---
 
-# Create a deployment following point 5 of readme.md
-
 apiVersion: apps/v1
 kind: Deployment    
 metadata:
@@ -88,3 +86,17 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: db_password
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: backend-api

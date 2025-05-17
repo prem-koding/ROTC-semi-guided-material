@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: crud-app
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+  namespace: crud-app
+type: Opaque
+data:
+  db_password: QXAwMHJQYSQkdzByZCEK

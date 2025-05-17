@@ -20,6 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  namespace: crud-app
 spec:
   replicas: 1
   selector:
@@ -29,7 +30,6 @@ spec:
     metadata:
       labels:
         app: postgres
-      namespace: crud-app
     spec:
       containers:
         - name: postgres

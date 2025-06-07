@@ -51,3 +51,7 @@ To use the application, you can use the following curl commands:
   ```bash
     curl -X DELETE http://localhost:8000/users/1 -H "Content-Type: application/json"
   ```
+- To do port forwarding for the backend service:
+  ```bash
+    kubectl port-forward service/backend-api 8000:8000 -n crud-app
+  ```
